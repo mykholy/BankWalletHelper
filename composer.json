@@ -8,13 +8,13 @@
     "homepage": "https://github.com/mykholy/bankwallethelper",
     "license": "MIT",
     "type": "library",
-    "authors": [
-        {
-            "name": "Ahmed El-kholy",
-            "email": "mykholys30@gmail.com",
-            "role": "Developer"
-        }
-    ],
+    "authors": [{
+        "name": "Ahmed El-kholy",
+        "email": "mykholys30@gmail.com",
+        "role": "Developer"
+    }],
+    "minimum-stability": "stable",
+
     "require": {
         "php": "^7.1"
     },
