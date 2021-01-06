@@ -40,7 +40,8 @@ class BankWalletHelper
         $response = curl_exec($curl);
 
         curl_close($curl);
-        return json_encode($response);
+        header('Content-type: application/json');
+        return ($response);
 
     }
 
@@ -69,7 +70,8 @@ class BankWalletHelper
         $response = curl_exec($curl);
         curl_close($curl);
 
-        return json_encode($response);
+        header('Content-type: application/json');
+        return ($response);
     }
 
 }
