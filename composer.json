@@ -1,0 +1,42 @@
+{
+    "name": "mykholy/bankwallethelper",
+    "description": "Bank Wallet Helper Api",
+    "keywords": [
+        "mykholy",
+        "bankwallethelper"
+    ],
+    "homepage": "https://github.com/mykholy/bankwallethelper",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ahmed El-kholy",
+            "email": "mykholys30@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mykholy\\BankWalletHelper\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mykholy\\BankWalletHelper\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
