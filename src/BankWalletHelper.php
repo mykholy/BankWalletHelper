@@ -5,14 +5,15 @@ namespace Mykholy\BankWalletHelper;
 class BankWalletHelper
 {
 
-    private $URL = "http://localhost/bank/";
+    private $URL;
     private $client_id;
     private $client_secret;
 
-    public function __construct($client_id, $client_secret)
+    public function __construct($client_id, $client_secret, $URL = "http://localhost/bank/")
     {
         $this->client_id = $client_id;
         $this->client_secret = $client_secret;
+        $this->URL = $URL;
     }
 
     public function checkout($data)
