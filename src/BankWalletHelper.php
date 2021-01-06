@@ -40,7 +40,7 @@ class BankWalletHelper
         $response = curl_exec($curl);
 
         curl_close($curl);
-        return $response;
+        return json_encode($response);
 
     }
 
@@ -61,14 +61,15 @@ class BankWalletHelper
             CURLOPT_POSTFIELDS => array('transaction_id' => $transaction_id),
             CURLOPT_HTTPHEADER => array(
                 'client-id: ' . $this->client_id,
-                'client-secret: ' . $this->client_secret
+                'client-secret: ' . $this->client_secret,
+                'Content-Type: application/json'
             ),
         ));
 
         $response = curl_exec($curl);
         curl_close($curl);
 
-        return $response;
+        return json_encode($response);
     }
 
 }
