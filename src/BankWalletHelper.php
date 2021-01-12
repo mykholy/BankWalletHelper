@@ -2,6 +2,9 @@
 
 namespace Mykholy\BankWalletHelper;
 
+use GuzzleHttp\Client;
+
+
 class BankWalletHelper
 {
 
@@ -19,60 +22,44 @@ class BankWalletHelper
     public function checkout($data)
     {
 
-        $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->URL . 'api/v1/merchants/payment/checkout',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $data,
-            CURLOPT_HTTPHEADER => array(
-                'client-id: ' . $this->client_id,
-                'client-secret: ' . $this->client_secret,
-                'Content-Type: application/json'
-            ),
-        ));
+        $client = new Client([
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'client-id' => $this->client_id,
+                'client-secret' => $this->client_secret,
+            ]
+        ]);
 
-        $response = curl_exec($curl);
+        $response = $client->post($this->URL . 'api/v1/merchants/payment/checkout',
+            ['body' => json_encode($data)]
+        );
 
-        curl_close($curl);
         header('Content-type: application/json');
-        return ($response);
+        return json_decode($response->getBody(), true);
 
     }
 
     public function doCheckoutPayment($transaction_id)
     {
 
-        $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->URL . 'api/v1/merchants/payment/doCheckoutPayment',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('transaction_id' => $transaction_id),
-            CURLOPT_HTTPHEADER => array(
-                'client-id: ' . $this->client_id,
-                'client-secret: ' . $this->client_secret,
-                'Content-Type: application/json'
-            ),
-        ));
+        $client = new Client([
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'client-id' => $this->client_id,
+                'client-secret' => $this->client_secret,
+            ]
+        ]);
 
-        $response = curl_exec($curl);
-        curl_close($curl);
+        $response = $client->post($this->URL . 'api/v1/merchants/payment/doCheckoutPayment',
+            ['form_params' => [
+                'transaction_id' => $transaction_id,
+            ]]
+        );
 
         header('Content-type: application/json');
-        return ($response);
+        return json_decode($response->getBody(), true);
     }
 
 }
